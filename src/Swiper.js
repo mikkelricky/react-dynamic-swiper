@@ -28,7 +28,8 @@ export default class Swiper extends Component {
       paginationClickable: PropTypes.bool,
       scrollBar: BoolOrFuncElementType,
       loop: PropTypes.bool,
-      onInitSwiper: PropTypes.func
+      onInitSwiper: PropTypes.func,
+      onSwiperUpdated: PropTypes.func
     },
     EventPropTypes
   )
@@ -223,7 +224,8 @@ export default class Swiper extends Component {
         'pagination',
         'paginationClickable',
         'scrollBar',
-        'onInitSwiper'
+        'onInitSwiper',
+        'onSwiperUpdated'
       ])
     )
   }
@@ -318,6 +320,10 @@ export default class Swiper extends Component {
       this._swiper.update()
       this._slidesCount = nextSlidesCount
       this._swiper.slideTo(index, 0, false)
+    }
+
+    if (this.props.onSwiperUpdated) {
+      this.props.onSwiperUpdated(this._swiper)
     }
   }
 
